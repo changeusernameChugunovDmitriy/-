@@ -1,0 +1,257 @@
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body class="body" bgcolor="#000" background="http://crescer-galaxy.surge.sh/img/sky.gif">
+  {% if request.user.is_authenticated %}
+  <button class="button_logout">Выйти из аккаунта</button>
+    {% else %}
+    {% endif %}
+  <center>
+    <h1>
+      <font face="Impact" color="white" size="8">
+        Алабуга
+      </font>
+      <font face="Impact" color="red" size="8">
+        Политех
+      </font>
+    </h1>
+    <p>
+      <font face="Arial" color="white" size="3">
+        Игра для Хакатона
+      </font>
+    </p>
+    <h2>
+      <font face="Impact" color="orange" size="5">
+        Демо-версия
+      </font>
+    </h2>
+  </center>
+  
+
+  <div class="menu">
+  {% if request.user.is_authenticated %}
+      <button class="button">Играть</button>
+      <button class="button">Магазин</button>
+      <button class="button">Статистика</button>
+    {% else %}
+    <button class="button" onclick="redirectToRegister()">Регистрация</button>
+    <button class="button" onclick="redirectToLogin()">Авторизация</button>
+    {% endif %}
+
+  </div>
+  <marquee direction="right" scrolldelay="50">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="80">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="130" class="margin">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="150">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="30">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="90">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+</body>
+  
+  
+  </div>
+</container>
+
+<script>
+  let body = document.querySelector('.body')
+  let div = document.querySelector('.button')
+  let menu = document.querySelector('.menu')
+  let logout = document.querySelector(".button_logout")
+  let healself = 0;
+  let meteor_check = 0;
+  let meteor_delete = 0
+  logout.addEventListener("click", () => {
+    window.location.href = '/api/v1/logout'
+  })
+  function redirectToRegister(){
+    window.location.href = '/api/v1/registration'
+  }
+  function redirectToLogin(){
+    window.location.href = '/api/v1/login'
+  }
+  function reloadPage() {
+    location.reload();
+}
+  div.addEventListener('click', () => {
+    menu.innerHTML = `
+    
+    <div class="glav">
+      <button class="button2" onclick="reloadPage()">
+    Назад
+    </button>
+    <div class="carts">
+      Выберите карту
+      <div class="redac">
+      <img class="img" src="/static/img/carta5.jpg" alt=".">
+      <img class="img" src="/static/img/carta4.png" alt=".">
+      <div>
+      <div>
+      
+      
+      </div>
+    `
+    let imgs = document.querySelectorAll('.img')
+    imgs.forEach(img =>{
+      img.addEventListener('click', () => {
+        let my_img = img.src
+        menu.innerHTML = 
+        `
+        <div class="glav">
+      <button class="button2" onclick="reloadPage()">
+    Назад
+    </button>
+    <div class="carts">
+      Выберите сложность
+      <div class="redac">
+        <div class="complexy">
+      <button class="button3">Легкий</button>
+      <button class="button4">Средний</button>
+      <button class="button5">Сложный</button>
+    </div>
+      <div>
+      <div>
+      
+      
+      </div>
+        `
+
+        let comp = document.querySelectorAll(".complexy button")
+
+    comp.forEach(com => {
+      com.addEventListener("click", () => {
+        let complexity = com.textContent
+        if (complexity == "Легкий"){
+          healself = 3
+          meteor_check = 20
+        }
+        if (complexity == "Средний"){
+          healself = 2
+          meteor_check = 30
+        }
+        if (complexity == "Сложный"){
+          healself = 1
+          meteor_check = 50
+        }
+        menu.innerHTML = `<div class="glav">
+  <button class="button2" onclick="reloadPage()">Назад</button>
+  <p class="text center">Выберите скин<p>
+  <div class="redac_skin">
+    {% for skin in user_skins %}
+    <div class="text_img">
+      <p class="text">{{skin.name}}</p>
+      <img class="img" src="{{skin.img.url}}" alt="1">
+      <hr>
+    </div>
+    {% endfor %}
+  </div>
+</div>`
+let skins = document.querySelectorAll('.text_img');
+skins.forEach(skin => {
+  skin.addEventListener("click", () => {
+    let selectedSkin = skin.querySelector(".img").src;
+    body.innerHTML = `<body>
+      <div class="div_cont">
+        
+      <p class="text healself">Здоровье: ${healself}</p>
+        <p class="text">Необходимо сбить: ${meteor_check}</p>
+        <p class="text delete_meteor">Метеоритов сбито: ${meteor_delete}</p>
+        
+        </div>
+      <img class="img_cursor" src="${selectedSkin}">
+      </body>
+    <style>
+      body {
+        
+    background-image: url("${my_img}");
+    background-size: cover;
+    background-position: center;
+  }
+  </style>
+    `
+    let healselfDisplay = document.querySelector(".healself");
+    let meteorDelete = document.querySelector(".delete_meteor")
+    document.addEventListener("mousemove", function(event) {
+  let x = event.clientX;
+  let y = event.clientY;
+  let image = document.querySelector('.img_cursor');
+  image.style.left = (x-90) + 'px';
+  image.style.top = (y-100) + 'px';
+});
+function spawnMeteor() {
+            let meteor = document.createElement('img');
+            meteor.src = '/static/img/метеорит1.png';
+            meteor.classList.add('img_met');
+
+            let x = Math.random() * window.innerWidth;
+            let y = 0;
+            meteor.style.left = x + 'px';
+            meteor.style.top = y + 'px';
+            document.body.appendChild(meteor);
+
+            function moveMeteor() {
+                y += 5;
+                meteor.style.top = y + 'px';
+
+                if (y < window.innerHeight) {
+                    requestAnimationFrame(moveMeteor);
+                } else {
+                    meteor.remove();
+                    healself--
+                    healselfDisplay.textContent = `Здоровье ${healself}`
+                    if (healself <= 0){
+                      clearInterval(intervalId);
+                      body.innerHTML += 
+        `
+        <div class="glav_delete">
+      <button class="button2" onclick="reloadPage()">
+    Назад
+    </button>
+    <div class="carts">
+      Ты проиграл!
+      <p>Результаты:</p>
+      <div class="redac">
+        <div class="complexy">
+
+          <p>Метеоритов сбито: ${meteor_delete}</p>
+
+      <button class="button10" onclick="reloadPage()">В главное меню</button>
+    </div>
+      <div>
+      <div>
+      
+      
+      </div>
+        `
+        
+                    }
+                }
+            }
+            moveMeteor();
+        }
+        let intervalId = setInterval(spawnMeteor, 2000);
+
+  });
+});
+
+      })
+    })
+      })
+    })
+    
+
+  
+  
+  })
+</script>

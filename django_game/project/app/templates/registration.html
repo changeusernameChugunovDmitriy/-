@@ -1,0 +1,68 @@
+
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+
+<body bgcolor="#000" background="http://crescer-galaxy.surge.sh/img/sky.gif">
+  <center>
+    <h1>
+      <font face="Impact" color="white" size="8">
+        Алабуга
+      </font>
+      <font face="Impact" color="red" size="8">
+        Политех
+      </font>
+    </h1>
+    <p>
+      <font face="Arial" color="white" size="3">
+        Игра для Хакатона
+      </font>
+    </p>
+    <h2>
+      <font face="Impact" color="orange" size="5">
+        Демо-версия
+      </font>
+    </h2>
+  </center>
+  <div class="menu">
+  <div class="register">
+    
+    <button class="button2" onclick="reloadPage()">
+      Назад
+      </button>
+
+      
+    <form class="register_input" method="post">
+      <h2 class="text">Меню регистрации</h2>
+    {% csrf_token %}
+{{form}}
+      <p class="error">{{error}}</p>
+<button class="button6">Регистрация</button>
+    </form>
+  </div>
+      </div>
+  <marquee direction="right" scrolldelay="50">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="80">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="130" class="margin">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="150">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="30">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="90">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+</body>
+<script>
+  function reloadPage() {
+    window.location.href = '/api/v1/home';
+}
+</script>

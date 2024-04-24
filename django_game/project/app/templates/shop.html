@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="body" bgcolor="#000" background="http://crescer-galaxy.surge.sh/img/sky.gif">
+<center>
+    <h1>
+      <font face="Impact" color="white" size="8">
+        Алабуга
+      </font>
+      <font face="Impact" color="red" size="8">
+        Политех
+      </font>
+    </h1>
+    <p>
+      <font face="Arial" color="white" size="3">
+        Игра для Хакатона
+      </font>
+    </p>
+    <h2>
+      <font face="Impact" color="orange" size="5">
+        Демо-версия
+      </font>
+    </h2>
+  </center>
+<div class="menu">
+<div class="glav">
+  <button class="button2" onclick="reloadPage()">Назад</button>
+  <p class="text center">Выберите скин<p>
+  <div class="redac_skin">
+  {% for skin in skins %}
+    <div class="text_img" onclick="add_shop({{skin.id}})">
+
+      <p class="text">{{skin.name}}</p>
+      <img class="img" src="{{skin.img.url}}" alt="1">
+      <p class="text">Цена: {{skin.price}}</p>
+
+      <hr>
+
+    </div>
+  {% endfor %}
+</div>
+</div>
+  </div>
+ <marquee direction="right" scrolldelay="50">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="80">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+  <marquee direction="right" scrolldelay="130" class="margin">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="150">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+<marquee direction="right" scrolldelay="30">
+      <img src="https://i.pinimg.com/originals/8f/75/33/8f7533863e6bc9c896fae726cde50f6b.png" alt="Nave" width="120">
+  </marquee>
+
+</body>
+</html>
+<script>
+  function reloadPage(){
+    window.location.href = '/api/v1/home'
+  }
+
+  function add_shop(id){
+    window.location.href = `/api/v1/skin/${id}`;
+  }
+</script>
